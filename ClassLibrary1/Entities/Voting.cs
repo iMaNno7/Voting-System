@@ -1,6 +1,7 @@
 ﻿using Domain.Enums;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +14,7 @@ public class Voting
     public string Subject { get; set; }
     public string Description { get; set; }
     public VotingStatus Status { get; set; }
-    public ICollection<VotingOption> VotingOptions { get; private set; }
+    public ICollection<VotingOption>? VotingOptions { get; private set; }
     public void AddVotingOption(string title)
     {
         if (VotingOptions == null) VotingOptions = new List<VotingOption>();
@@ -24,3 +25,4 @@ public class Voting
         });
     }
 }
+

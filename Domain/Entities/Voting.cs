@@ -14,7 +14,7 @@ public class Voting
     public string Subject { get; set; }
     public string Description { get; set; }
     public VotingStatus Status { get; set; }
-    public ICollection<VotingOption>? VotingOptions { get; private set; }
+    public ICollection<VotingOption> VotingOptions { get; private set; }
     public void AddVotingOption(string title)
     {
         if (VotingOptions == null) VotingOptions = new List<VotingOption>();
@@ -24,5 +24,10 @@ public class Voting
             Title = title
         });
     }
+    public VotingOption GetVotingOption(int id)
+    =>
+        this.VotingOptions.SingleOrDefault(x=>x.Id==id);
+    
+
 }
 

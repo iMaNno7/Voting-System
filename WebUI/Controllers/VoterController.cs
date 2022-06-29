@@ -7,27 +7,27 @@ namespace WebUI.Controllers
 {
     [ApiController]
     [Route("[controller]/[action]")]
-    public class VotingController : ControllerBase
+    public class VoterController : ControllerBase
     {
        
-        private readonly IVotingRepository _votingRepository;
+        private readonly IVoterRepository _voterRepository;
 
-        public VotingController()
+        public VoterController()
         {
-            _votingRepository = new VotingRepository();
+            _voterRepository = new VoterRepository();
         }
 
         [HttpPost]
-        public async Task<ActionResult> Create([FromBody]Voting voting)
+        public async Task<ActionResult> Create([FromBody]Voter voter)
         {
-            _votingRepository.Create(voting);
+            _voterRepository.Create(voter);
             return Ok();
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Voting>> Get([FromRoute] int id)
         {
-           return Ok(_votingRepository.GetById(id));
+           return Ok(_voterRepository.GetById(id));
         }
     }
 }

@@ -1,12 +1,6 @@
 ﻿using Application.Common.Contracts;
 using Domain.Entities;
-using Domain.Exceptions;
 using Infrastructure.Persistence;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructure.Repositories
 {
@@ -19,7 +13,7 @@ namespace Infrastructure.Repositories
         }
 
         public void AddVote(VoterVote voterVotes)
-        {   
+        {
             voterVotes.Id = this.voterVotes.Count + 1;
             this.voterVotes.Add(voterVotes);
         }
@@ -29,7 +23,7 @@ namespace Infrastructure.Repositories
 
         public bool CheckIsVoted(int votingid, int voterId)
              => voterVotes
-                    .Any(x => x.Voter.Id == voterId&& x.VotingOption.Voting.Id == votingid);
+                    .Any(x => x.Voter.Id == voterId && x.VotingOption.Voting.Id == votingid);
 
         public VoterVote GetVoterVoteById(int id)
              => voterVotes.SingleOrDefault(x => x.Id == id);

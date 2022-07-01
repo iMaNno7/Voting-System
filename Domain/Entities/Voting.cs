@@ -1,10 +1,4 @@
 ﻿using Domain.Enums;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Domain.Entities;
 
@@ -18,12 +12,12 @@ public class Voting
     public void AddVotingOption(string title)
     {
         if (VotingOptions == null) VotingOptions = new List<VotingOption>();
-        if (VotingOptions.Any(x => x.Title == title) is true) throw new ArgumentException();        
+        if (VotingOptions.Any(x => x.Title == title) is true) throw new ArgumentException();
         VotingOptions.Add(new VotingOption()
         {
             Title = title,
             Id = (short)(this.VotingOptions.Count + 1),
-            Voting=this
+            Voting = this
         });
     }
     public void AddVotingOption(string[] title)
@@ -33,8 +27,8 @@ public class Voting
     }
     public VotingOption GetVotingOption(int id)
     =>
-        this.VotingOptions.SingleOrDefault(x=>x.Id==id);
-    
+        this.VotingOptions.SingleOrDefault(x => x.Id == id);
+
 
 }
 

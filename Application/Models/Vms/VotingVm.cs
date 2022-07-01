@@ -1,11 +1,5 @@
-﻿using Application.Models.Dtos;
-using Domain.Entities;
+﻿using Domain.Entities;
 using Domain.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Models.Vms;
 
@@ -20,7 +14,7 @@ public class VotingVm
     {
         return new()
         {
-            Id=voting.Id,
+            Id = voting.Id,
             Description = voting.Description,
             Status = voting.Status,
             Subject = voting.Subject,

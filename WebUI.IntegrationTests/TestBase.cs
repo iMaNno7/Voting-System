@@ -1,9 +1,5 @@
 ﻿using Application.Models.Dtos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Domain.Enums;
 
 namespace WebUI.IntegrationTests
 {
@@ -12,6 +8,7 @@ namespace WebUI.IntegrationTests
         public TestBase()
         {
             GenFu.GenFu.Configure<VotingDto>()
+                .Fill(x => x.Status,VotingStatus.Started )
                 .Fill(x => x.VotingOptions, new string[] { "a", "b", "c", "d" });
         }
     }

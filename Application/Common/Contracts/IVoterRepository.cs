@@ -1,5 +1,4 @@
 ﻿using Domain.Entities;
-using System.Diagnostics.Metrics;
 
 namespace Application.Common.Contracts;
 

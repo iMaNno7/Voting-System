@@ -23,7 +23,7 @@ namespace WebUI.Controllers
             Voting voting = dto;
             voting.AddVotingOption(dto.VotingOptions);
 
-            var res=await _votingRepository.Create(voting);
+            var res = await _votingRepository.Create(voting);
             return Ok(res);
         }
 

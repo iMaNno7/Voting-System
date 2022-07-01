@@ -5,7 +5,7 @@ namespace Application.Models.Dtos;
 
 public class VoterDto
 {
-    [Required,RegularExpression(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$", ErrorMessage ="email invalid")]
+    [Required, RegularExpression(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$", ErrorMessage = "email invalid")]
     public string Email { get; set; }
     [Required]
     public string FirstName { get; set; }

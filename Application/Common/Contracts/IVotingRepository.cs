@@ -1,5 +1,4 @@
-﻿using Domain.Entities;
-using VotingEntity = Domain.Entities.Voting;
+﻿using VotingEntity = Domain.Entities.Voting;
 namespace Application.Common.Contracts;
 
 public interface IVotingRepository

@@ -1,7 +1,4 @@
-﻿using Domain.Entities;
-using Domain.Enums;
-
-namespace Application.Models.Dtos;
+﻿namespace Application.Models.Dtos;
 
 public class VoterVoteDto
 {

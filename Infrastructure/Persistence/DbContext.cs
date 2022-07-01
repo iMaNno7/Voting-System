@@ -1,15 +1,11 @@
 ﻿using Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructure.Persistence
 {
     public static class DbContext
     {
-        static DbContext() {
+        static DbContext()
+        {
             Voters = new List<Voter>();
             Votings = new List<Voting>();
             VoterVotes = new List<VoterVote>();

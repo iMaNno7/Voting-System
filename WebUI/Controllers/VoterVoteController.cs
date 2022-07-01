@@ -1,7 +1,6 @@
 using Application.Common.Contracts;
 using Application.Models.Dtos;
 using Domain.Entities;
-using Domain.Enums;
 using Domain.Exceptions;
 using Infrastructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
@@ -26,18 +25,18 @@ namespace WebUI.Controllers
         public async Task<ActionResult<bool>> AddVote([FromBody] VoterVoteDto dto)
         {
             var voter = _voterRepository.GetById(dto.VoterId);
-            var voting = _votingRepository.GetById(dto.VotingId);            
+            var voting = _votingRepository.GetById(dto.VotingId);
             if (voter is null || voting is null)
                 return BadRequest();
 
-            var option = voting.GetVotingOption(dto.VotingOptionId);            
+            var option = voting.GetVotingOption(dto.VotingOptionId);
             if (_voterVoteRepository.CheckIsVoted(voting.Id, voter.Id))
                 throw new VoterAlreadyVotedException(voter.FullName);
 
             if (_votingRepository.CheckVotingStatus(dto.VotingId) is false)
                 throw new VotingStatusException(voting.Status);
 
-            _voterVoteRepository.AddVote(new(){Voter=voter, Voting = voting, VotingOption=option});
+            _voterVoteRepository.AddVote(new() { Voter = voter, Voting = voting, VotingOption = option });
             return Ok(true);
         }
 

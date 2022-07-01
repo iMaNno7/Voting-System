@@ -9,6 +9,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastru
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebUI", "WebUI\WebUI.csproj", "{7908C5E7-55FA-4399-8248-18D05FED0FD2}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{CEC22AB5-5540-4F5A-8099-CC71082612C2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebUI.IntegrationTests", "WebUI.IntegrationTests\WebUI.IntegrationTests.csproj", "{A4AE9D08-2067-418B-A783-8C2CCB52FBE9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{7908C5E7-55FA-4399-8248-18D05FED0FD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7908C5E7-55FA-4399-8248-18D05FED0FD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7908C5E7-55FA-4399-8248-18D05FED0FD2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CEC22AB5-5540-4F5A-8099-CC71082612C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEC22AB5-5540-4F5A-8099-CC71082612C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEC22AB5-5540-4F5A-8099-CC71082612C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEC22AB5-5540-4F5A-8099-CC71082612C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4AE9D08-2067-418B-A783-8C2CCB52FBE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4AE9D08-2067-418B-A783-8C2CCB52FBE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4AE9D08-2067-418B-A783-8C2CCB52FBE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4AE9D08-2067-418B-A783-8C2CCB52FBE9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

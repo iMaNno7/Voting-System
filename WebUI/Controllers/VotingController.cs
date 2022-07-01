@@ -1,15 +1,15 @@
+using Application.Common.Contracts;
+using Application.Models.Dtos;
+using Application.Models.Vms;
 using Domain.Entities;
-using Infrastructure.Contracts;
 using Infrastructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebUI.Controllers
 {
-    [ApiController]
-    [Route("[controller]/[action]")]
-    public class VotingController : ControllerBase
+    public class VotingController : ApiControllerBase
     {
-       
+
         private readonly IVotingRepository _votingRepository;
 
         public VotingController()
@@ -18,16 +18,22 @@ namespace WebUI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Create([FromBody]Voting voting)
+        public async Task<ActionResult<Voting>> Create([FromBody] VotingDto dto)
         {
-            _votingRepository.Create(voting);
-            return Ok();
+            Voting voting = dto;
+            voting.AddVotingOption(dto.VotingOptions);
+
+            var res=await _votingRepository.Create(voting);
+            return Ok(res);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Voting>> Get([FromRoute] int id)
+        public async Task<ActionResult<VotingVm>> Get([FromRoute] int id)
         {
-           return Ok(_votingRepository.GetById(id));
+            VotingVm voting = _votingRepository.GetById(id);
+            if (voting == null)
+                return BadRequest("voting not exist");
+            return Ok(voting);
         }
     }
 }

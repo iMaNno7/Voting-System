@@ -2,9 +2,8 @@
 
 public class VotingOption
 {
-    public int Id { get; set; }
-    public string Title { get; set; }
-    public int VotingId { get; set; }
+    public short Id { get; set; }
+    public required string Title { get; set; }
     //n.p
-    public Voting Voting { get; set; }
+    public required Voting Voting { get; set; }
 }

@@ -1,15 +1,14 @@
+using Application.Common.Contracts;
+using Application.Models.Dtos;
 using Domain.Entities;
-using Infrastructure.Contracts;
 using Infrastructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebUI.Controllers
 {
-    [ApiController]
-    [Route("[controller]/[action]")]
-    public class VoterController : ControllerBase
+    public class VoterController : ApiControllerBase
     {
-       
+
         private readonly IVoterRepository _voterRepository;
 
         public VoterController()
@@ -18,16 +17,21 @@ namespace WebUI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Create([FromBody]Voter voter)
+        public async Task<ActionResult<Voter>> Create([FromBody] VoterDto dto)
         {
-            _voterRepository.Create(voter);
-            return Ok();
+            if (_voterRepository.CheckEmailVoter(dto.Email))
+                return BadRequest("email already exist");
+            var voter = await _voterRepository.Create(dto);
+            return Ok(voter);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Voting>> Get([FromRoute] int id)
+        public async Task<ActionResult<Voter>> Get([FromRoute] int id)
         {
-           return Ok(_voterRepository.GetById(id));
+            var voter = _voterRepository.GetById(id);
+            if (voter is null)
+                return BadRequest("voter not exist");
+            return Ok(voter);
         }
     }
 }

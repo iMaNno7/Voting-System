@@ -1,7 +1,6 @@
-﻿using Domain.Entities;
+﻿using Application.Common.Contracts;
+using Domain.Entities;
 using Domain.Exceptions;
-using Domain.Model;
-using Infrastructure.Contracts;
 using Infrastructure.Persistence;
 using System;
 using System.Collections.Generic;
@@ -13,28 +12,27 @@ namespace Infrastructure.Repositories
 {
     public class VoterVoteRepository : IVoterVoteRepository
     {
+        private ICollection<VoterVote> voterVotes;
         public VoterVoteRepository()
         {
+            voterVotes = DbContext.VoterVotes;
         }
 
         public void AddVote(VoterVote voterVotes)
-        {            
-            if (CheckIsVoted(voterVotes.VotingOption.VotingId, voterVotes.VoterId))
-                throw new VoterAlreadyVotedException(voterVotes.Voter.FullName);
-
-            voterVotes.Id = DbContext.VoterVotes.Count + 1;
-            DbContext.VoterVotes.Add(voterVotes);
+        {   
+            voterVotes.Id = this.voterVotes.Count + 1;
+            this.voterVotes.Add(voterVotes);
         }
 
         public List<VoterVote> GetVotingVotes(int votingid)
-             => DbContext.VoterVotes.Where(x => x.VoterId == votingid).ToList();
+             => voterVotes.Where(x => x.Voter.Id == votingid).ToList();
 
         public bool CheckIsVoted(int votingid, int voterId)
-             => DbContext.VoterVotes
-                    .Any(x => x.VoterId == voterId&& x.VotingOption.VotingId == voterId);
+             => voterVotes
+                    .Any(x => x.Voter.Id == voterId&& x.VotingOption.Voting.Id == votingid);
 
         public VoterVote GetVoterVoteById(int id)
-             => DbContext.VoterVotes.SingleOrDefault(x => x.Id == id);
+             => voterVotes.SingleOrDefault(x => x.Id == id);
 
         public VoterVote UpdateVote(VoterVote voterVote)
         {
@@ -44,6 +42,6 @@ namespace Infrastructure.Repositories
         }
 
         public void DeleteVote(VoterVote voterVote)
-            => DbContext.VoterVotes.Remove(voterVote);
+            => voterVotes.Remove(voterVote);
     }
 }

@@ -2,17 +2,11 @@
 
 public class VoterVote
 {
-    public VoterVote(Voter voter,VotingOption votingOption)
+    public VoterVote()
     {
-        this.Voter=voter;
-        this.VotingOption=votingOption;
-        this.VoterId=voter.Id;
-        this.VotingOptionId = votingOption.Id;
     }
     public int Id{ get; set; }
-    public int VoterId { get; set; }
-    public int VotingOptionId { get; set; }
-    //n.p
-    public Voter Voter { get; set; }
-    public VotingOption VotingOption { get; set; }
+    public required Voter Voter { get; set; }
+    public required Voting Voting { get; set; }
+    public required VotingOption VotingOption { get; set; }
 }

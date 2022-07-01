@@ -1,7 +1,6 @@
-﻿using Domain.Entities;
+﻿using Application.Common.Contracts;
+using Domain.Entities;
 using Domain.Enums;
-using Domain.Model;
-using Infrastructure.Contracts;
 using Infrastructure.Persistence;
 using System;
 using System.Collections.Generic;
@@ -13,14 +12,25 @@ namespace Infrastructure.Repositories
 {
     public class VotingRepository : IVotingRepository
     {
+        private ICollection<Voting> votings;
+        static SemaphoreSlim semaphore = new SemaphoreSlim(1, 1);
+
         public VotingRepository()
         {
+            votings = DbContext.Votings;
         }
 
-        public void Create(Voting voting)
+        public async Task<Voting> Create(Voting voting)
         {
-            voting.Id = DbContext.Votings.Count + 1;
-            DbContext.Votings.Add(voting);
+            try
+            {
+                await semaphore.WaitAsync();
+                voting.Id = votings.Count + 1;
+                votings.Add(voting);
+                semaphore.Release();
+                return voting;
+            }
+            finally { }
         }
 
         public void AddVotingOption(int votingId, string[] options)
@@ -31,10 +41,10 @@ namespace Infrastructure.Repositories
         }
 
         public Voting GetById(int votingid)
-             => DbContext.Votings.SingleOrDefault(x => x.Id == votingid);
+             => votings.SingleOrDefault(x => x.Id == votingid);
 
         public bool CheckVotingStatus(int id)
-            => DbContext.Votings.SingleOrDefault(s => s.Id == id)?.Status switch
+            => votings.SingleOrDefault(s => s.Id == id)?.Status switch
             {
                 VotingStatus.Pending => false,
                 VotingStatus.Finished => false,
